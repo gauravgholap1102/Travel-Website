@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelEase 🇮🇳 — India-First Travel Portal & Budgets</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            saffron: '#f97316',
+            emerald: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-gray-950">
+
+  <!-- TOP LIVE ANNOUNCEMENT TICKER -->
+  <div class="bg-gradient-to-r from-emerald-950 via-slate-900 to-amber-950 text-emerald-300 text-xs py-2 px-4 border-b border-emerald-500/20">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
+        <span class="status-dot-live shrink-0"></span>
+        <span class="font-bold text-white uppercase tracking-wider text-[11px]">India-First Focus:</span>
+        <span>ALL prices displayed strictly in Indian Rupees (₹ / INR). Guaranteed zero USD/EUR.</span>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-gray-300 shrink-0 text-[11px]">
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-phone text-emerald-400"></i> Contact Gaurav Gholap: <strong class="text-white">862383062</strong></span>
+        <span class="text-gray-600">|</span>
+        <span class="flex items-center gap-1.5"><i class="fa-solid fa-envelope text-amber-400"></i> <strong class="text-white">gauravgholap2005@gmail.com</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 glass-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchView('home')">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 to-amber-500 p-0.5 shadow-lg glow-emerald">
+            <div class="w-full h-full bg-gray-950 rounded-[14px] flex items-center justify-center">
+              <i class="fa-solid fa-plane-departure text-emerald-400 text-xl"></i>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-2xl font-black tracking-tight text-white">Travel<span class="text-emerald-400">Ease</span></span>
+              <span class="text-xl">🇮🇳</span>
+            </div>
+            <span class="text-[10px] uppercase font-extrabold tracking-widest text-amber-400 block -mt-1">Incredible India Travel</span>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs Desktop -->
+        <nav class="hidden lg:flex items-center gap-1">
+          <button onclick="switchView('home')" data-view="home" class="nav-tab-btn active px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-house text-emerald-400 mr-1.5"></i> Home
+          </button>
+          <button onclick="switchView('destinations')" data-view="destinations" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-location-dot text-rose-400 mr-1.5"></i> 40 Destinations
+          </button>
+          <button onclick="switchView('budgets')" data-view="budgets" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-wallet text-amber-400 mr-1.5"></i> Demo Budgets
+          </button>
+          <button onclick="switchView('packages')" data-view="packages" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-box-archive text-indigo-400 mr-1.5"></i> Packages
+          </button>
+          <button onclick="switchView('hotels')" data-view="hotels" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-hotel text-cyan-400 mr-1.5"></i> Hotels
+          </button>
+          <button onclick="switchView('flights')" data-view="flights" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-plane text-purple-400 mr-1.5"></i> Flights
+          </button>
+          <button onclick="switchView('calculator')" data-view="calculator" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-calculator text-emerald-400 mr-1.5"></i> Budget Calc
+          </button>
+          <button onclick="switchView('itinerary')" data-view="itinerary" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-route text-amber-400 mr-1.5"></i> Itinerary
+          </button>
+          <button onclick="switchView('gallery')" data-view="gallery" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-images text-pink-400 mr-1.5"></i> Gallery
+          </button>
+          <button onclick="switchView('contact')" data-view="contact" class="nav-tab-btn px-3.5 py-2 text-xs font-bold rounded-xl text-gray-300 hover:text-white transition-all">
+            <i class="fa-solid fa-headset text-emerald-400 mr-1.5"></i> Contact
+          </button>
+          <button id="nav-admin-tab" onclick="switchView('admin')" data-view="admin" class="nav-tab-btn hidden px-3.5 py-2 text-xs font-bold rounded-xl text-amber-400 hover:text-amber-300 transition-all border border-amber-500/30 bg-amber-500/10">
+            <i class="fa-solid fa-crown text-amber-400 mr-1.5"></i> Admin Panel
+          </button>
+        </nav>
+
+        <!-- Auth Section -->
+        <div id="auth-nav-container" class="flex items-center gap-2">
+          <!-- Populated dynamically by auth.js -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-gray-950/95 backdrop-blur-xl border-t border-gray-800 p-2 flex items-center justify-around text-[10px]">
+    <button onclick="switchView('home')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-emerald-400">
+      <i class="fa-solid fa-house text-base"></i> Home
+    </button>
+    <button onclick="switchView('destinations')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-emerald-400">
+      <i class="fa-solid fa-compass text-base"></i> 40 Dests
+    </button>
+    <button onclick="switchView('calculator')" class="flex flex-col items-center gap-1 text-emerald-400 font-bold">
+      <i class="fa-solid fa-calculator text-lg"></i> Calc
+    </button>
+    <button onclick="switchView('packages')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-emerald-400">
+      <i class="fa-solid fa-box-archive text-base"></i> Packages
+    </button>
+    <button onclick="switchView('contact')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-emerald-400">
+      <i class="fa-solid fa-phone text-base"></i> Contact
+    </button>
+  </div>
+
+  <!-- MAIN VIEW CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: HOME VIEW -->
+    <!-- ========================================== -->
+    <section id="view-home" class="view-section space-y-16">
+      
+      <!-- HERO BANNER -->
+      <div class="relative rounded-3xl overflow-hidden border border-gray-800 min-h-[520px] flex items-center shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&w=1600&q=80" alt="Incredible India" class="absolute inset-0 w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/80 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-black/30"></div>
+
+        <div class="relative z-10 p-8 sm:p-14 max-w-2xl space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-extrabold pulse-badge">
+            <span class="status-dot-live"></span> 🇮🇳 India-First Travel Platform
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
+            Explore <span class="gradient-text-saffron">Incredible India</span> 🇮🇳
+          </h1>
+
+          <p class="text-gray-300 text-base sm:text-lg leading-relaxed">
+            From Himalayan mountains to tropical beaches, discover 40+ unforgettable destinations across India with 100% INR (₹) pricing.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <button onclick="switchView('destinations')" class="px-7 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-gray-950 font-black text-sm rounded-2xl shadow-xl transition-all glow-emerald flex items-center gap-2">
+              <i class="fa-solid fa-compass"></i> Explore India
+            </button>
+            <button onclick="switchView('calculator')" class="px-7 py-3.5 bg-gray-900/80 hover:bg-gray-900 text-amber-400 border border-amber-500/30 font-bold text-sm rounded-2xl transition-all flex items-center gap-2 backdrop-blur-md">
+              <i class="fa-solid fa-calculator"></i> Calculate Trip Budget
+            </button>
+          </div>
+
+          <!-- Feature Highlights Bar -->
+          <div class="pt-6 grid grid-cols-3 gap-3 border-t border-gray-800 text-xs text-gray-300">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-indian-rupee-sign text-emerald-400 text-base"></i>
+              <span><strong>100% INR</strong> Pricing</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-map-location-dot text-amber-400 text-base"></i>
+              <span><strong>40 Destinations</strong> Database</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-user-shield text-indigo-400 text-base"></i>
+              <span><strong>Gaurav Gholap</strong> Contact</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXPLORE INCREDIBLE INDIA FEATURED SECTION -->
+      <div class="space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-widest mb-1">
+              <i class="fa-solid fa-location-dot"></i> Top Indian Attractions
+            </div>
+            <h2 class="text-3xl font-black text-white">Popular Destinations Across India</h2>
+            <p class="text-gray-400 text-sm mt-1">Handpicked travel hotspots with starting budgets in Indian Rupees (₹).</p>
+          </div>
+          <button onclick="switchView('destinations')" class="px-5 py-2.5 bg-gray-800 hover:bg-gray-700 text-emerald-400 font-bold text-xs rounded-xl border border-emerald-500/30 flex items-center gap-2 transition-all self-start md:self-auto">
+            View All 40 Destinations <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div id="home-popular-destinations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+
+      <!-- SECONDARY INTERNATIONAL DESTINATIONS -->
+      <div class="bg-gray-900/40 p-8 rounded-3xl border border-gray-800/80 space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="px-3 py-1 bg-gray-800 text-gray-400 text-[10px] font-bold uppercase rounded-full border border-gray-700">Secondary Options</span>
+            <h3 class="text-2xl font-black text-white mt-1">International Destinations (Secondary)</h3>
+            <p class="text-gray-400 text-xs mt-0.5">Global travel packages formatted strictly in Indian Rupees (₹).</p>
+          </div>
+        </div>
+
+        <div id="international-destinations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: 40 INDIAN DESTINATIONS VIEW -->
+    <!-- ========================================== -->
+    <section id="view-destinations" class="view-section hidden space-y-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Indian Destinations Database</span>
+          <h2 class="text-3xl font-black text-white mt-2">Explore 40 Iconic Destinations in India</h2>
+          <p class="text-gray-400 text-sm mt-1">Discover ratings, best visiting times, average daily budgets, attractions, and activity guides.</p>
+        </div>
+        <span id="destinations-count-badge" class="px-4 py-2 bg-gray-800 text-amber-400 text-xs font-bold rounded-xl border border-amber-500/20 self-start md:self-auto">
+          Loading 40 Destinations...
+        </span>
+      </div>
+
+      <!-- MULTI-FILTER BAR -->
+      <div class="glass-card p-5 rounded-2xl border border-gray-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Search Input -->
+        <div class="relative">
+          <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Search Destination / Sight</label>
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+            <input type="text" id="search-destinations-input" placeholder="e.g. Goa, Taj Mahal, Solang..." class="w-full bg-gray-900 border border-gray-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+          </div>
+        </div>
+
+        <!-- Region Filter -->
+        <div>
+          <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Filter by Region</label>
+          <select id="filter-region" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">All Regions (All India)</option>
+            <option value="North India">North India</option>
+            <option value="South India">South India</option>
+            <option value="West India">West India</option>
+            <option value="East India">East India</option>
+            <option value="Northeast India">Northeast India</option>
+            <option value="Central India">Central India</option>
+            <option value="Islands">Islands</option>
+          </select>
+        </div>
+
+        <!-- Travel Type Filter -->
+        <div>
+          <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Filter by Travel Type</label>
+          <select id="filter-type" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">All Travel Types</option>
+            <option value="Beach">Beach</option>
+            <option value="Mountains">Mountains</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Heritage">Heritage</option>
+            <option value="Spiritual">Spiritual</option>
+            <option value="Wildlife">Wildlife</option>
+            <option value="Honeymoon">Honeymoon</option>
+            <option value="Budget">Budget</option>
+          </select>
+        </div>
+
+        <!-- Budget Range Filter -->
+        <div>
+          <label class="block text-[10px] uppercase font-bold text-gray-400 mb-1">Filter by Starting Budget (INR)</label>
+          <select id="filter-budget" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="ALL">All Budget Ranges</option>
+            <option value="under-5000">Under ₹5,000</option>
+            <option value="5000-10000">₹5,000 – ₹10,000</option>
+            <option value="10000-20000">₹10,000 – ₹20,000</option>
+            <option value="20000-50000">₹20,000 – ₹50,000</option>
+            <option value="50000-plus">₹50,000+</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Destination Cards Grid -->
+      <div id="destinations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: DEMO REGIONAL TRAVEL BUDGETS VIEW -->
+    <!-- ========================================== -->
+    <section id="view-budgets" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-amber-500/20 text-amber-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Demo Travel Budgets</span>
+        <h2 class="text-3xl font-black text-white mt-2">Indian Regional Travel Budget Estimates</h2>
+        <p class="text-gray-400 text-sm mt-1">Realistic sample budget ranges (Budget, Mid-range, Luxury) for popular travel circuits in India.</p>
+      </div>
+
+      <div id="regional-budgets-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: TOUR PACKAGES VIEW -->
+    <!-- ========================================== -->
+    <section id="view-packages" class="view-section hidden space-y-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Sample Indian Packages</span>
+          <h2 class="text-3xl font-black text-white mt-2">Curated Tour Packages in INR (₹)</h2>
+          <p class="text-gray-400 text-sm mt-1">All packages are clearly marked with "Starting from / Demo Package Price".</p>
+        </div>
+      </div>
+
+      <div id="tour-packages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 5: HOTELS VIEW -->
+    <!-- ========================================== -->
+    <section id="view-hotels" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Hotel Accommodations</span>
+        <h2 class="text-3xl font-black text-white mt-2">Sample Indian Hotels & Nightly Rates</h2>
+        <p class="text-gray-400 text-sm mt-1">All prices in Indian Rupees (Budget ₹999-₹2,499 | 3-Star ₹2,500-₹5,000 | 4-Star ₹5,000-₹10,000 | 5-Star ₹10,000+).</p>
+      </div>
+
+      <div id="hotels-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 6: FLIGHTS VIEW -->
+    <!-- ========================================== -->
+    <section id="view-flights" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-purple-500/20 text-purple-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Domestic Flights</span>
+        <h2 class="text-3xl font-black text-white mt-2">Sample Domestic Flight Prices (INR)</h2>
+        <p class="text-amber-400 text-xs font-semibold mt-1 flex items-center gap-1.5">
+          <i class="fa-solid fa-triangle-exclamation"></i> "Sample fare — actual flight prices may vary."
+        </p>
+      </div>
+
+      <div id="flights-list-container" class="space-y-4">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 7: TRIP BUDGET CALCULATOR VIEW -->
+    <!-- ========================================== -->
+    <section id="view-calculator" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Interactive Tool</span>
+        <h2 class="text-3xl font-black text-white mt-2">Trip Budget Calculator (INR)</h2>
+        <p class="text-gray-400 text-sm mt-1">Calculate your total estimated trip cost across Hotel, Food, Transport, and Activities in India.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Input Form -->
+        <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl border border-gray-800 space-y-5">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-emerald-400"></i> Configure Trip Parameters
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Select Destination</label>
+              <select id="calc-destination" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+                <option value="goa">Goa (Beach & Party)</option>
+                <option value="jaipur">Jaipur (Rajasthan Royal)</option>
+                <option value="manali">Manali (Himalayan Snow)</option>
+                <option value="kerala">Kerala (Munnar & Backwaters)</option>
+                <option value="srinagar">Srinagar / Kashmir</option>
+                <option value="leh-ladakh">Leh-Ladakh (High Pass)</option>
+                <option value="varanasi">Varanasi (Spiritual Ghats)</option>
+                <option value="andaman">Andaman Islands</option>
+                <option value="meghalaya">Meghalaya (Northeast)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Number of Travelers</label>
+              <input type="number" id="calc-travelers" value="2" min="1" max="20" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Trip Duration (Days)</label>
+              <input type="number" id="calc-days" value="4" min="1" max="30" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Hotel Category</label>
+              <select id="calc-hotel" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+                <option value="budget">Budget Hotel (₹1,499/night)</option>
+                <option value="threestar" selected>3-Star Hotel (₹3,200/night)</option>
+                <option value="fourstar">4-Star Resort (₹6,500/night)</option>
+                <option value="fivestar">5-Star Luxury Palace (₹14,000/night)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Daily Food Plan</label>
+              <select id="calc-food" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+                <option value="budget">Local Eateries / Dhabas (₹450/day)</option>
+                <option value="standard" selected>Mid-range Cafes (₹950/day)</option>
+                <option value="luxury">Fine Dining (₹2,200/day)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Local Transport</label>
+              <select id="calc-transport" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+                <option value="public">Public Bus / Metro / Auto (₹400/day)</option>
+                <option value="bike">Rental Scooter / Bike (₹750/day)</option>
+                <option value="sedan" selected>Private AC Sedan Cab (₹2,200/day)</option>
+                <option value="suv">SUV / Luxury Vehicle (₹3,800/day)</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Activities & Sightseeing Level</label>
+              <select id="calc-activities" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+                <option value="basic">Free Sightseeing & Temple Visits (₹250/day)</option>
+                <option value="moderate" selected>Fort Entries, Boat Rides & Guided Tours (₹850/day)</option>
+                <option value="adventure">Full Adventure (Rafting, Scuba, Paragliding) (₹2,200/day)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Output Visual Box -->
+        <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl border border-gray-800 flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <h3 class="text-xl font-bold text-white flex items-center justify-between">
+              <span>Cost Breakdown</span>
+              <span class="text-xs px-2.5 py-1 bg-emerald-500/20 text-emerald-400 rounded-lg">INR (₹)</span>
+            </h3>
+
+            <!-- Itemized breakdown list -->
+            <div class="space-y-2 text-xs divide-y divide-gray-800">
+              <div class="flex justify-between py-2">
+                <span class="text-gray-400">Hotel Accommodation:</span>
+                <span id="calc-res-hotel" class="font-extrabold text-white">₹0</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span class="text-gray-400">Food & Dining:</span>
+                <span id="calc-res-food" class="font-extrabold text-white">₹0</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span class="text-gray-400">Local Transport:</span>
+                <span id="calc-res-transport" class="font-extrabold text-white">₹0</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span class="text-gray-400">Activities & Tours:</span>
+                <span id="calc-res-activities" class="font-extrabold text-white">₹0</span>
+              </div>
+            </div>
+
+            <!-- LIVE GRAPHIC VISUAL CONTAINER -->
+            <div id="calc-visual-chart" class="pt-2">
+              <!-- Rendered dynamically by calculator.js -->
+            </div>
+          </div>
+
+          <!-- Total Calculation Banner -->
+          <div class="bg-gradient-to-br from-emerald-950/80 to-slate-900 p-5 rounded-2xl border border-emerald-500/30 text-center space-y-1">
+            <span class="text-xs uppercase font-extrabold text-emerald-400 tracking-wider">Estimated Total Trip Cost</span>
+            <div id="calc-res-total" class="text-4xl font-black text-amber-400">₹0</div>
+            <div class="text-xs text-gray-300">
+              Per Person: <strong id="calc-res-per-person" class="text-emerald-400">₹0</strong>
+            </div>
+            <p class="text-[10px] text-gray-400 italic pt-1">"Estimate only — actual costs may vary."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 8: TRAVEL ITINERARY VIEW -->
+    <!-- ========================================== -->
+    <section id="view-itinerary" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-amber-500/20 text-amber-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Custom Travel Planner</span>
+        <h2 class="text-3xl font-black text-white mt-2">Day-by-Day Travel Itinerary Generator</h2>
+        <p class="text-gray-400 text-sm mt-1">Select an Indian destination and duration to build your printable trip itinerary.</p>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl border border-gray-800 flex flex-col sm:flex-row items-end gap-4">
+        <div class="flex-1 w-full">
+          <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Select Destination</label>
+          <select id="itin-destination" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="goa">Goa</option>
+            <option value="jaipur">Jaipur</option>
+            <option value="manali">Manali</option>
+            <option value="kerala">Kerala</option>
+            <option value="srinagar">Srinagar</option>
+            <option value="leh-ladakh">Leh-Ladakh</option>
+            <option value="varanasi">Varanasi</option>
+            <option value="andaman">Andaman & Nicobar</option>
+          </select>
+        </div>
+        <div class="w-full sm:w-48">
+          <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Duration (Days)</label>
+          <select id="itin-days" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-emerald-500">
+            <option value="3">3 Days</option>
+            <option value="4" selected>4 Days</option>
+            <option value="5">5 Days</option>
+            <option value="7">7 Days</option>
+          </select>
+        </div>
+        <button onclick="generateCustomItinerary()" class="w-full sm:w-auto px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-black text-xs rounded-xl shadow-lg transition-all shrink-0">
+          Generate Itinerary
+        </button>
+      </div>
+
+      <div id="itin-result-container" class="print-area">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 9: PHOTO GALLERY VIEW -->
+    <!-- ========================================== -->
+    <section id="view-gallery" class="view-section hidden space-y-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <span class="px-3 py-1 bg-pink-500/20 text-pink-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Incredible India Visuals</span>
+          <h2 class="text-3xl font-black text-white mt-2">Indian Destinations Photo Gallery</h2>
+          <p class="text-gray-400 text-sm mt-1">High-definition landscape photos across beach, mountain, and heritage destinations.</p>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterGallery('ALL')" data-category="ALL" class="gallery-filter-btn px-3 py-1.5 bg-emerald-500 text-gray-950 font-bold text-xs rounded-xl transition-all">All Photos</button>
+          <button onclick="filterGallery('Beach')" data-category="Beach" class="gallery-filter-btn px-3 py-1.5 bg-gray-800 text-gray-300 hover:text-white font-bold text-xs rounded-xl transition-all">Beach</button>
+          <button onclick="filterGallery('Mountains')" data-category="Mountains" class="gallery-filter-btn px-3 py-1.5 bg-gray-800 text-gray-300 hover:text-white font-bold text-xs rounded-xl transition-all">Mountains</button>
+          <button onclick="filterGallery('Heritage')" data-category="Heritage" class="gallery-filter-btn px-3 py-1.5 bg-gray-800 text-gray-300 hover:text-white font-bold text-xs rounded-xl transition-all">Heritage</button>
+          <button onclick="filterGallery('Spiritual')" data-category="Spiritual" class="gallery-filter-btn px-3 py-1.5 bg-gray-800 text-gray-300 hover:text-white font-bold text-xs rounded-xl transition-all">Spiritual</button>
+        </div>
+      </div>
+
+      <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 10: REVIEWS & RATINGS VIEW -->
+    <!-- ========================================== -->
+    <section id="view-reviews" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-amber-500/20 text-amber-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Community Experience</span>
+        <h2 class="text-3xl font-black text-white mt-2">Indian Traveler Reviews & Ratings</h2>
+        <p class="text-gray-400 text-sm mt-1">Read feedback from travelers and submit your own trip experiences.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Submit Review Form -->
+        <div class="lg:col-span-5 glass-card p-6 rounded-3xl border border-gray-800 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-pen-to-square text-emerald-400"></i> Write a Review
+          </h3>
+
+          <form id="review-form" onsubmit="handleReviewSubmit(event)" class="space-y-3 text-xs">
+            <div>
+              <label class="block text-gray-400 uppercase font-bold mb-1">Your Name</label>
+              <input type="text" id="rev-input-name" required placeholder="e.g. Gaurav Gholap" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase font-bold mb-1">Your City/State</label>
+              <input type="text" id="rev-input-city" required placeholder="e.g. Pune, Maharashtra" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase font-bold mb-1">Destination Visited</label>
+              <input type="text" id="rev-input-dest" required placeholder="e.g. Goa, Manali, Kashmir" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-emerald-500">
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase font-bold mb-1">Rating (1 to 5 Stars)</label>
+              <select id="rev-input-rating" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-emerald-500">
+                <option value="5">⭐⭐⭐⭐⭐ (5/5 Exceptional)</option>
+                <option value="4">⭐⭐⭐⭐ (4/5 Great)</option>
+                <option value="3">⭐⭐⭐ (3/5 Good)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-gray-400 uppercase font-bold mb-1">Your Review Comment</label>
+              <textarea id="rev-input-comment" rows="3" required placeholder="Share details about hotel stay, budget, transport, or sights..." class="w-full bg-gray-900 border border-gray-700 rounded-xl p-2.5 text-white focus:outline-none focus:border-emerald-500"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-black rounded-xl shadow-lg transition-all">
+              Submit Travel Review
+            </button>
+          </form>
+        </div>
+
+        <!-- Reviews List -->
+        <div id="reviews-list-container" class="lg:col-span-7 space-y-4">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 11: CONTACT US VIEW -->
+    <!-- ========================================== -->
+    <section id="view-contact" class="view-section hidden space-y-8">
+      <div>
+        <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 font-extrabold text-xs rounded-full uppercase tracking-wider">Official Contact</span>
+        <h2 class="text-3xl font-black text-white mt-2">Contact Our Travel Team</h2>
+        <p class="text-gray-300 text-sm mt-1">"Have questions about your next trip? Contact our travel team and start planning your journey."</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- PROMINENT PHONE & OWNER CONTACT CARD -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-card p-8 rounded-3xl border border-emerald-500/40 glow-emerald space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-amber-500 p-0.5 shadow-xl shrink-0">
+                <div class="w-full h-full bg-gray-950 rounded-[14px] flex items-center justify-center">
+                  <i class="fa-solid fa-user-shield text-2xl text-emerald-400"></i>
+                </div>
+              </div>
+              <div>
+                <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 font-extrabold text-[10px] uppercase rounded">Website Owner / Contact Person</span>
+                <h3 class="text-2xl font-black text-white mt-1">Gaurav Gholap</h3>
+                <span class="text-xs text-gray-400">TravelEase Founder & Head Consultant</span>
+              </div>
+            </div>
+
+            <!-- PROMINENT PHONE CARD -->
+            <div class="bg-gray-900/90 p-5 rounded-2xl border border-emerald-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-400 uppercase font-bold flex items-center gap-1.5"><i class="fa-solid fa-phone text-emerald-400"></i> Phone Helpline</span>
+                <span class="status-dot-live"></span>
+              </div>
+              <a href="tel:862383062" class="text-3xl font-black text-emerald-400 hover:text-emerald-300 transition-colors tracking-wider block font-mono">
+                862383062
+              </a>
+              <span class="text-[11px] text-gray-400 block">Direct Call & WhatsApp Consultation</span>
+            </div>
+
+            <!-- EMAIL CARD -->
+            <div class="bg-gray-900/90 p-5 rounded-2xl border border-amber-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-gray-400 uppercase font-bold flex items-center gap-1.5"><i class="fa-solid fa-envelope text-amber-400"></i> Email Address</span>
+              </div>
+              <a href="mailto:gauravgholap2005@gmail.com" class="text-base font-bold text-amber-400 hover:text-amber-300 transition-colors tracking-wide block font-mono truncate">
+                gauravgholap2005@gmail.com
+              </a>
+              <span class="text-[11px] text-gray-400 block">Official Direct Support Email</span>
+            </div>
+
+            <div class="pt-2 text-xs text-gray-400 space-y-2">
+              <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-emerald-400"></i> <span>Support Hours: 9:00 AM – 8:00 PM (IST)</span></div>
+              <div class="flex items-center gap-2"><i class="fa-solid fa-indian-rupee-sign text-amber-400"></i> <span>All Inquiries Processed in INR (₹)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTACT FORM -->
+        <div class="lg:col-span-7 glass-card p-8 rounded-3xl border border-gray-800 space-y-6">
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane text-emerald-400"></i> Send an Inquiry Message
+          </h3>
+
+          <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Your Name</label>
+              <input type="text" id="contact-name" required placeholder="Gaurav Gholap" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Email Address</label>
+                <input type="email" id="contact-email" required placeholder="gauravgholap2005@gmail.com" value="gauravgholap2005@gmail.com" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Phone Number</label>
+                <input type="tel" id="contact-phone" required placeholder="862383062" value="862383062" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Subject</label>
+              <input type="text" id="contact-subject" required placeholder="Inquiry about Goa / Rajasthan trip budget" class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Message</label>
+              <textarea id="contact-message" rows="4" required placeholder="Please provide details about your travel dates, number of travelers, and preferred Indian destinations..." class="w-full bg-gray-900 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-emerald-500"></textarea>
+            </div>
+
+            <button type="submit" class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-black rounded-xl shadow-lg transition-all text-sm flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> Send Travel Inquiry
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 12: ADMIN PANEL VIEW -->
+    <!-- ========================================== -->
+    <section id="view-admin" class="view-section hidden space-y-8">
+      <div id="admin-content-area">
+        <!-- Rendered dynamically by admin.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-950 border-t border-gray-800 text-gray-400 text-xs py-10 mt-16 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Col 1 -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-black text-white">Travel<span class="text-emerald-400">Ease</span></span>
+            <span class="text-lg">🇮🇳</span>
+          </div>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            India-First travel portal dedicated to showcasing 40+ destinations across India with transparent INR (₹) budgets.
+          </p>
+          <div class="text-[11px] text-amber-400 font-bold">
+            All prices strictly in Indian Rupees (₹).
+          </div>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase text-xs">Quick Links</h4>
+          <ul class="space-y-1 text-xs">
+            <li><button onclick="switchView('destinations')" class="hover:text-emerald-400">40 Indian Destinations</button></li>
+            <li><button onclick="switchView('budgets')" class="hover:text-emerald-400">Demo Travel Budgets</button></li>
+            <li><button onclick="switchView('calculator')" class="hover:text-emerald-400">Trip Budget Calculator</button></li>
+            <li><button onclick="switchView('packages')" class="hover:text-emerald-400">Tour Packages (INR)</button></li>
+          </ul>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase text-xs">Indian Regions</h4>
+          <ul class="space-y-1 text-xs">
+            <li><span class="hover:text-emerald-400 cursor-pointer" onclick="switchView('destinations')">North India (Manali, Kashmir, Leh)</span></li>
+            <li><span class="hover:text-emerald-400 cursor-pointer" onclick="switchView('destinations')">South India (Kerala, Coorg, Ooty)</span></li>
+            <li><span class="hover:text-emerald-400 cursor-pointer" onclick="switchView('destinations')">West India (Goa, Mumbai, Rajasthan)</span></li>
+            <li><span class="hover:text-emerald-400 cursor-pointer" onclick="switchView('destinations')">Islands & East (Andaman, Meghalaya)</span></li>
+          </ul>
+        </div>
+
+        <!-- Col 4 -->
+        <div class="space-y-2">
+          <h4 class="font-bold text-white uppercase text-xs">Owner & Contact</h4>
+          <div class="bg-gray-900/60 p-3 rounded-xl border border-gray-800 space-y-1 text-xs">
+            <div class="font-bold text-white">Gaurav Gholap</div>
+            <div class="text-emerald-400 font-mono"><i class="fa-solid fa-phone"></i> 862383062</div>
+            <div class="text-amber-400 font-mono text-[11px] truncate"><i class="fa-solid fa-envelope"></i> gauravgholap2005@gmail.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-gray-900 flex flex-col sm:flex-row items-center justify-between text-gray-400 gap-4">
+        <div>&copy; 2026 TravelEase India. Built for Indian Travelers.</div>
+        <div class="flex items-center gap-4 text-gray-400">
+          <span>🇮🇳 Made for India</span>
+          <span>•</span>
+          <span>Strictly INR (₹)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================== -->
+  <!-- MODAL CONTAINERS -->
+  <!-- ========================================== -->
+
+  <!-- DESTINATION DETAIL MODAL -->
+  <div id="destination-modal" class="fixed inset-0 z-50 hidden modal-backdrop items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-gray-950 border border-gray-800 rounded-3xl max-w-3xl w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl relative">
+      <div id="destination-modal-body">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div id="booking-modal" class="fixed inset-0 z-50 hidden modal-backdrop items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-gray-950 border border-gray-800 rounded-3xl max-w-lg w-full p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div id="booking-modal-body">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="fixed inset-0 z-50 hidden modal-backdrop items-center justify-center p-4">
+    <div class="bg-gray-950 border border-gray-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl">
+      <div id="auth-modal-body">
+        <!-- Populated dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden modal-backdrop items-center justify-center p-4" onclick="closeLightbox()">
+    <div class="relative max-w-4xl w-full" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute -top-10 right-0 text-white text-2xl hover:text-emerald-400">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img id="lightbox-img" src="" alt="Zoom" class="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl">
+      <div class="bg-gray-950/90 p-4 rounded-b-2xl border border-gray-800 mt-2 flex items-center justify-between">
+        <div>
+          <h4 id="lightbox-title" class="font-bold text-white text-base">Photo</h4>
+          <span id="lightbox-location" class="text-xs text-gray-400">Location</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT SCRIPTS IN ORDER -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
